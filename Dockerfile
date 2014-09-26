@@ -25,6 +25,8 @@ EXPOSE 22
 
 # Fix sudo
 RUN chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo
+# Enable passwordless sudo for users under the "sudo" group
+RUN sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
 
 # Dev tools
 RUN apt-get install -y git
